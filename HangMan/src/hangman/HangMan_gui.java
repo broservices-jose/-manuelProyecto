@@ -19,11 +19,13 @@ public class HangMan_gui extends javax.swing.JFrame {
     public HangMan_gui() {
         
         initComponents();
+        //lblimagen.setText("dfjkalsjfl");
+        lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/img0.jpg")));
     }
 
         
     private boolean iniciar;
-    private String [] contenedor = { "ESCRIBIR", "APUNTAR", "ACEPTAR", "ACTUAR", "PERMITIR", "PREGUNTAR", 
+/*    private String [] contenedor = { "ESCRIBIR", "APUNTAR", "ACEPTAR", "ACTUAR", "PERMITIR", "PREGUNTAR", 
                                          "EVITAR", "CAMBIAR", "CONSTRUIR", "Argentina","Australia","Brasil", 
                                          "Chile","China","Colombia", "Costa Rica", "Cuba", "Ecuador", "Egipto",
                                          "El Salvador", "España", "Estados Unidos", "Francia", "Haití", "Honduras",
@@ -34,24 +36,24 @@ public class HangMan_gui extends javax.swing.JFrame {
                                          "República Dominicana","Ruanda","Rumania","Rusia","Sudáfrica","Suecia",
                                          "Suiza","Tailandia","Ucrania","Uruguay","Vanuatu","Vaticano","Venezuela",
                                          "Vietnam","Yemen","Yibuti","Zimbabue"};
-    
+    */
     private char [] palabra_oculta;
     private char [] palabra;
     int vidas = 6, img = 0;
     private boolean cambio = false;
     
-    public void principal(){
-        this.palabra_oculta = aleatorio().toCharArray();
+    public void principal(String palabra){
+        this.palabra_oculta = palabra.toCharArray();
         String objeto = "";
         System.out.println(this.palabra_oculta);
         
         for (int i = 0; i < this.palabra_oculta.length; i++){
-            objeto += "_";
+            objeto += " _";
         }
         
         this.palabra = objeto.toCharArray();
         txtpalabraoculta.setText(objeto);
-        //lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("HangMan/Imagen/img0.jpg").getPath()));
+        lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/img0.jpg")));
     }
     
     private void evaluar (char letra){
@@ -98,7 +100,7 @@ public class HangMan_gui extends javax.swing.JFrame {
                     this.img += 1;
                     if (this.vidas > 0){
                         JOptionPane.showMessageDialog(null, "Fulano te quedan"+this.vidas+" vidas");
-                        //lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("HangMan/Imagen/img"+img+".jpg")));
+                        lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/img"+img+".jpg")));
                     }
                     else {
                         this.cambio = false;
@@ -136,10 +138,10 @@ public class HangMan_gui extends javax.swing.JFrame {
     private String adivinar(String palabra){
         return palabra;
     }
-    private String aleatorio(){
+/*    private String aleatorio(){
     int num = (int)(Math.random()*(contenedor.length));
     return contenedor[num];
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,6 +158,7 @@ public class HangMan_gui extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btninicial = new javax.swing.JButton();
         btnreiniciar = new javax.swing.JButton();
+        txtpalabraadiviniar = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         txtpalabra = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -208,6 +211,12 @@ public class HangMan_gui extends javax.swing.JFrame {
             }
         });
 
+        txtpalabraadiviniar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpalabraadiviniarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -217,7 +226,11 @@ public class HangMan_gui extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btninicial, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                     .addComponent(btnreiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtpalabraadiviniar, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,8 +238,10 @@ public class HangMan_gui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btninicial, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnreiniciar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnreiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtpalabraadiviniar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Introdusca una letra", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
@@ -287,7 +302,7 @@ public class HangMan_gui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -295,14 +310,14 @@ public class HangMan_gui extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(334, 334, 334))
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(386, Short.MAX_VALUE)
+                    .addContainerGap(527, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(20, 20, 20)))
         );
@@ -313,9 +328,9 @@ public class HangMan_gui extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -324,7 +339,7 @@ public class HangMan_gui extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(70, 70, 70)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(151, Short.MAX_VALUE)))
+                    .addContainerGap(280, Short.MAX_VALUE)))
         );
 
         pack();
@@ -354,15 +369,21 @@ public class HangMan_gui extends javax.swing.JFrame {
     private void btninicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninicialActionPerformed
         // TODO add your handling code here:
             if (evt.getSource() == btninicial){
-                if (this.iniciar == false){
-                   this.iniciar = true;
-                    JOptionPane.showMessageDialog(null, "Has iniciado sesion correctamente");
-                     principal(); 
+                if (txtpalabraadiviniar.getText() != null){
+                    if (this.iniciar == false){
+                       this.iniciar = true;
+                        JOptionPane.showMessageDialog(null, "Has iniciado sesion correctamente");
+                         principal(txtpalabraadiviniar.getText()); 
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Debe de Reiniciar sesion");
+
+                    }
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Debe de Reiniciar sesion");
-
+                    JOptionPane.showMessageDialog(null, "Por favor introdusca la palabra a adivinar antes de iniciar");
                 }
+                    
                 
 
         }
@@ -374,10 +395,14 @@ public class HangMan_gui extends javax.swing.JFrame {
                 if (this.iniciar == true){
                    this.iniciar = true;
                     JOptionPane.showMessageDialog(null, "Has Reiniciado sesion correctamente");
-                     principal(); 
+                     principal(txtpalabraadiviniar.getText()); 
                 }
          }   
     }//GEN-LAST:event_btnreiniciarActionPerformed
+
+    private void txtpalabraadiviniarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpalabraadiviniarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpalabraadiviniarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,6 +450,7 @@ public class HangMan_gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblimagen;
     private javax.swing.JTextField txtpalabra;
+    private javax.swing.JTextField txtpalabraadiviniar;
     private javax.swing.JTextField txtpalabraoculta;
     // End of variables declaration//GEN-END:variables
 }
