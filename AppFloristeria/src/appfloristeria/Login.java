@@ -23,68 +23,65 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
+   //  Este puto y capuño constructor me esta dando problema pero lo voy a resolver de inmedianteo
+   public Login(){
+        initComponents();
+        //this.setLocationRelativeTo(null);
+    }
     
-    // Este puto y capuño constructor me esta dando problema pero lo voy a resolver de inmedianteo
-//   public Login(){
-//        initComponents();
-//        this.setLocationRelativeTo(null);
-//    }
+ private  Formulario Inicio;  
     
- //private final Formulario Inicio;  
-    
-    // Esta linea de codigo representa el metodo constructor a usar
+   //  Esta linea de codigo representa el metodo constructor a usar
    
-//    public Login (Formulario form){
-//        this.Inicio = form;
-//        initComponents();
-//        for(int i = 0; i < 100; i++){
-//            if (i == 0){
-//                setjpb(i, "Cargando Componetes del sistema...");
-//            }
-//            else if (i == 20){
-//                setjpb(i, "Conectandose a la base de datos...");
-//            }
-//            else if (i == 40){
-//                setjpb(i, "Cargando los modulos del sistema...");
-//            }
-//            
-//            else if (i == 60){
-//                setjpb(i, "Cargando las Interfaces de Usuario..");
-//            }
-//            
-//            else if (i == 80){
-//                setjpb(i, "Interfaces de usuario cargada correctamente...");
-//            }
-//            
-//            else if (i == 99){
-//                setjpb(i, "Carga compleata correctamente...");
-//            }
-//            
-//            else{
-//               setjpb(i, "Cargando..."); 
-//            }
-//            
-//            
-//        }
-//        this.setLocationRelativeTo(null);
-//        
-//    }
+    public Login (Formulario form){
+        this.Inicio = form;
+        initComponents();
+        for(int i = 0; i < 100; i++){
+            switch (i) {
+                case 0:
+                    setjpb(i, "Cargando Componetes del sistema...");
+                    break;
+                case 20:
+                    setjpb(i, "Conectandose a la base de datos...");
+                    break;
+                case 40:
+                    setjpb(i, "Cargando los modulos del sistema...");
+                    break;
+                case 60:
+                    setjpb(i, "Cargando las Interfaces de Usuario..");
+                    break;
+                case 80:
+                    setjpb(i, "Interfaces de usuario cargada correctamente...");
+                    break;
+                case 99:
+                    setjpb(i, "Carga compleata correctamente...");
+                    break;
+                default:
+                    setjpb(i, "Cargando...");
+                    break; 
+            }
+            
+            
+        }
+        this.setLocationRelativeTo(null);
+        
+    }
 
     
     // Este es el metodo set para el jProgressaBar
     
     
-//    private void setjpb(int progreso, String informacion){
-//        Inicio.getlbl().setText(informacion);
-//        Inicio.getjpb().setValue(progreso);
-//        
-//        try{
-//            Thread.sleep(1000);
-//            
-//        }catch(InterruptedException ex){
-//            JOptionPane.showMessageDialog(null, "No se pudo ejecutar la aplicacion");
-//        }
-//    }
+    private void setjpb(int progreso, String informacion){
+        Inicio.getlbl().setText(informacion);
+        Inicio.getjpb().setValue(progreso);
+        
+        try{
+            Thread.sleep(1000);
+            
+        }catch(InterruptedException ex){
+            JOptionPane.showMessageDialog(null, "No se pudo ejecutar la aplicacion");
+        }
+    }
     
     private Connection cn;
     
@@ -96,14 +93,13 @@ public class Login extends javax.swing.JFrame {
         
         int resultado = 0;
         try{
-            String sql = "select * from dbflores where nombre ='" + nombre +"' and clave ='"+clave+"'";
+            String sql = "select * from usuario where nombre ='" + nombre +"' and clave ='"+clave+"'";
             cn = Conexion.conectar();
             Statement estado = cn.createStatement();
             ResultSet resul = estado.executeQuery(sql);
             
             if (resul.next()){
                 resultado = 1;
-                JOptionPane.showMessageDialog(null, "todo anda bien");
             }
                
         }catch(SQLException | ClassNotFoundException ex){
@@ -131,17 +127,15 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-        getContentPane().add(txtclave);
-        txtclave.setBounds(80, 230, 240, 29);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(txtclave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 240, 29));
 
         txtnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtnombre);
-        txtnombre.setBounds(80, 180, 240, 28);
+        getContentPane().add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 240, 28));
 
         txtcancelar.setText("Cancelar");
         txtcancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,8 +143,7 @@ public class Login extends javax.swing.JFrame {
                 txtcancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtcancelar);
-        txtcancelar.setBounds(210, 300, 127, 34);
+        getContentPane().add(txtcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 127, 34));
 
         txtingresar.setText("Ingresar");
         txtingresar.addActionListener(new java.awt.event.ActionListener() {
@@ -158,16 +151,13 @@ public class Login extends javax.swing.JFrame {
                 txtingresarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtingresar);
-        txtingresar.setBounds(60, 300, 127, 34);
+        getContentPane().add(txtingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 127, 34));
 
         jLabel1.setText("Usuario");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 160, 36, 14);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jLabel2.setText("Contraseña");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 210, 56, 14);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,7 +168,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcancelarActionPerformed
 
     private void txtingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtingresarActionPerformed
-       JOptionPane.showMessageDialog(null, "el esta adentro y funciona");
         try {
             // TODO add your handling code here:
             
@@ -188,16 +177,14 @@ public class Login extends javax.swing.JFrame {
                 + "satisfactoriamente al sistema mas completo del mercado", "Mensaje de bienvenida",
                 JOptionPane.INFORMATION_MESSAGE);
                 
-                Formulario frm = new Formulario();
+                Principal frm = new Principal();
                 frm.setVisible(true);
                 
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error: Usuario o Contrasenia incorrecto");
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txtingresarActionPerformed

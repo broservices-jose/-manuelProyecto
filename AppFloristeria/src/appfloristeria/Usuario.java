@@ -101,7 +101,8 @@ public class Usuario extends javax.swing.JFrame {
                 lblhorainici.setText("8 : 00 AM");
                 lblhoracierre.setText("6 : 00 PM");
                 cbempleado.setSelectedItem(consulta.getString("Empleado"));
-                lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/"+consulta.getString("Imagen"))));
+                lblimagen.setIcon(new javax.swing.ImageIcon(consulta.getString("Imagen")));
+                lblimagen2.setIcon(new javax.swing.ImageIcon(consulta.getString("Imagen")));
                 lblempleado.setText(consulta.getString("Empleado"));
                 lblcuenta.setText(consulta.getString("nombre"));
                 lblclave.setText(consulta.getString("clave"));
@@ -175,12 +176,14 @@ public class Usuario extends javax.swing.JFrame {
         try{
             int id = cbempleado.getSelectedIndex();
             System.out.println(id);
-            String sql = "select e.id_empleado, e.nombre, e.apellido, e.correo, e.telefono, e.direccion, e.fecha_nac, e.sexo, e.fecha_contracto, i.ruta as ruta from empleado as e inner join imagen as i on e.id_imagen = i.id_imagen where e.id_empleado ='"+id+"'";
+            String sql = "select distinct e.nombre, e.id_empleado, e.nombre, e.apellido, e.correo, e.telefono, e.direccion, e.fecha_nac, e.sexo, e.fecha_contracto, i.ruta as ruta from empleado as e inner join imagen as i on e.id_imagen = i.id_imagen where e.estado = 'habilitado' and e.id_empleado ='"+id+"'";
             cn = Conexion.conectar();
             cmd = cn.createStatement();
             consulta = cmd.executeQuery(sql);
             if (consulta.next()){
-                lblimagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/"+consulta.getString("ruta"))));            }
+                lblimagen.setIcon(new javax.swing.ImageIcon(consulta.getString("ruta")));
+                lblimagen2.setIcon(new javax.swing.ImageIcon(consulta.getString("ruta")));
+            }
         }catch(ClassNotFoundException | SQLException ex){
             JOptionPane.showMessageDialog(null, "Error :"+ex.getMessage());
         }
@@ -234,6 +237,7 @@ public class Usuario extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         lblhoracierre = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        lblimagen2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jttabla = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
@@ -350,10 +354,20 @@ public class Usuario extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 237, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblimagen2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 163, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 81, Short.MAX_VALUE)
+                    .addComponent(lblimagen2)
+                    .addGap(0, 82, Short.MAX_VALUE)))
         );
 
         jttabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -448,11 +462,9 @@ public class Usuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 109, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -809,6 +821,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblhoracierre;
     private javax.swing.JLabel lblhorainici;
     private javax.swing.JLabel lblimagen;
+    private javax.swing.JLabel lblimagen2;
     private javax.swing.JPasswordField txtclave;
     private javax.swing.JTextField txtcuenta;
     private javax.swing.JFormattedTextField txthoraciere;

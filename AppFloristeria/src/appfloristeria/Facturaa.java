@@ -8,6 +8,7 @@ package appfloristeria;
 import Controles.Conexion;
 import static Controles.factura.consultaf;
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -194,8 +195,9 @@ public class Facturaa extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        
+        FileInputStream fichero = null;
         try {
+            
             Map parametro = new HashMap();
             parametro.put("id", cbcodigo.getSelectedItem());
             cn = Conexion.conectar();

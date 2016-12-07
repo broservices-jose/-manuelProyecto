@@ -183,20 +183,7 @@ public class empleado {
             e.printStackTrace();
           }finally{
     
-        try {
-            
-            if(cn != null){
-            
-                cn.close();
-                
-            }
-            
-        } catch (Exception ex) {
         
-            JOptionPane.showMessageDialog(null, "Error al intentar cerrar la conexión:\n"
-                                     + ex, "Error en la operación", JOptionPane.ERROR_MESSAGE);
-            
-        }
     
     }
 

@@ -459,6 +459,8 @@ public class Empleado extends javax.swing.JFrame{
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(1150, 600));
         getContentPane().setLayout(null);
 
         jtpanel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -943,7 +945,7 @@ public class Empleado extends javax.swing.JFrame{
         jtpanel.addTab("Registrar", jPanel2);
 
         getContentPane().add(jtpanel);
-        jtpanel.setBounds(0, 4, 1040, 540);
+        jtpanel.setBounds(0, 14, 1040, 530);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1002,10 +1004,8 @@ public class Empleado extends javax.swing.JFrame{
             dato = registrar();
 
             if (dato2 > 0){
-                ingresar();
 
                 if (dato > 0 ){
-                    registrar();
                     JOptionPane.showMessageDialog(null, "Datos Registrado correctamente");
                     limpiar();
                     limpiar_t();

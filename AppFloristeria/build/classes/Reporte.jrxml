@@ -6,7 +6,7 @@
 	<parameter name="parameter1" class="java.lang.String"/>
 	<parameter name="id" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select f.id_factura as codigo, d.num_detalle, p.producto, c.categoria, d.precio, d.cantidad, d.descuento,  f.fecha , d.totaldesc, d.subtotal, f.totaldesc, f.total  from  detalle d inner join producto p on d.id_producto = p.id_producto inner join categoria c on p.id_categoria = c.id_categoria  inner join factura f on d.id_factura = f.id_factura where f.id_factura = $P{id};]]>
+		<![CDATA[select f.id_factura as codigo, d.num_detalle, p.producto, c.categoria, d.precio, d.cantidad, d.descuento,  f.fecha , d.totaldesc, d.subtotal  from  detalle d inner join producto p on d.id_producto = p.id_producto inner join categoria c on p.id_categoria = c.id_categoria  inner join factura f on d.id_factura = f.id_factura where f.id_factura = $P{id};]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Long"/>
 	<field name="num_detalle" class="java.lang.Long">
@@ -27,16 +27,7 @@
 	<field name="descuento" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fecha" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="totaldesc" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="subtotal" class="java.lang.Double">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="total" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<group name="codigo">
@@ -51,7 +42,7 @@
 					<text><![CDATA[codigo]]></text>
 				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="15534c91-074f-428a-96b0-5f9d27d4a829"/>
+					<reportElement mode="Opaque" x="100" y="0" width="32" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="15534c91-074f-428a-96b0-5f9d27d4a829"/>
 					<textElement>
 						<font size="24" isBold="true"/>
 					</textElement>
@@ -99,63 +90,35 @@
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="329dc02a-cc4a-454d-81e2-1725b474b0ac"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3c9022f5-b582-463c-a21d-285bab1a2343"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[totaldesc]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="55" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="35adf254-8814-4103-83d4-440d53305303"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[total]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="110" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dc103bef-66da-4d3b-b855-8cf1a88cce37"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[fecha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="165" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d52029a4-3585-486e-b117-4981ae2d17fe"/>
+				<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d52029a4-3585-486e-b117-4981ae2d17fe"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[num_detalle]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="220" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b69dc761-4e71-4075-b254-e63a7e2dea73"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[producto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="275" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="bcc75883-c1ea-4ee2-80ff-28a6fed038ec"/>
+				<reportElement mode="Opaque" x="151" y="1" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="bcc75883-c1ea-4ee2-80ff-28a6fed038ec"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[categoria]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="330" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="76d1a172-8942-4a8f-a1ae-597009249dde"/>
+				<reportElement mode="Opaque" x="220" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="76d1a172-8942-4a8f-a1ae-597009249dde"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[precio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="385" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1983c121-0e80-438e-9808-e74cc2fd656e"/>
+				<reportElement mode="Opaque" x="330" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1983c121-0e80-438e-9808-e74cc2fd656e"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="440" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="182de846-9793-4338-bd6e-fba0ea69a4db"/>
+				<reportElement mode="Opaque" x="414" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="182de846-9793-4338-bd6e-fba0ea69a4db"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -168,6 +131,13 @@
 				</textElement>
 				<text><![CDATA[subtotal]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="77" y="0" width="55" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b69dc761-4e71-4075-b254-e63a7e2dea73"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[producto]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -175,20 +145,6 @@
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="da6b8f8d-1f26-40f2-ae4d-3df5c565c8e5"/>
 			</line>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="55" height="20" uuid="740441ab-0d80-4682-994b-e4bf57daf8bd"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totaldesc}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="55" y="0" width="55" height="20" uuid="9bcded76-8860-4f16-833a-bca2a999b452"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="110" y="0" width="55" height="20" uuid="8f83d684-5c81-4eea-b22c-306ea048892f"/>
 				<textElement>

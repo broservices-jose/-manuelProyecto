@@ -45,6 +45,7 @@ public class Facturacion extends javax.swing.JFrame {
         initComponents();
         consultar();
         llenar();
+        comparar();
         desabilitar();
 //        tomauser();
         
@@ -175,6 +176,7 @@ public class Facturacion extends javax.swing.JFrame {
     detalle d = new detalle();
     factura f = new factura();
     DefaultTableModel modelo = new DefaultTableModel();
+    int compa = 0, otro = 0;
     
     // ===============================================================================
     // Esta linea de codigo representa la creacion de los objetos que nos van a permitir
@@ -341,6 +343,59 @@ public class Facturacion extends javax.swing.JFrame {
         txttotalfactura.setText("0.0");
     }
     
+    // ==============================================================================================
+    // Esta linea de codigo repu comprueba si se termino de registrar una fictura 
+    // =============================================================================================
+    private void primero(){
+        try{
+            String query = "select max(id_factura) from factura";
+            cn = Conexion.conectar();
+            estado = cn.createStatement();
+            cmd = estado.executeQuery(query);
+        
+            while(cmd.next()){
+                compa = cmd.getInt("id_factura");
+            }
+        }catch(ClassNotFoundException | SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    // ==============================================================================================
+    // Esta linea de codigo repu comprueba si se termino de registrar una fictura 
+    // =============================================================================================
+
+    private void otro(){
+        try{
+            String query = "select max(id_factura) from detalle";
+            cn = Conexion.conectar();
+            estado = cn.createStatement();
+            cmd = estado.executeQuery(query);
+        
+            while(cmd.next()){
+                otro = cmd.getInt("id_factura");
+            }
+        }catch(ClassNotFoundException | SQLException ex){
+            ex.printStackTrace();
+        }
+    }    
+    
+    // ==============================================================================================
+    // Esta linea de codigo repu comprueba si se termino de registrar una fictura 
+    // =============================================================================================
+    
+    private void comparar(){
+        primero();
+        otro();
+        if (compa == otro){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Todavia no se a terminado de registrar las ventas realizada \n para terminar de "
+                                            + "registrar las ventas dar un clic en el boton registrar factura");
+            obtenerfac();
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
