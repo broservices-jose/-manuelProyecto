@@ -1,0 +1,154 @@
+create database dbflores;
+
+use dbflores;
+
+-- Esta linea de codigo representa la creacionde las tablas de la base de datos
+
+create table usuario(
+id_usuario int not null auto_increment primary key,
+nombre varchar (30),
+clave varchar (25),
+id_empleado int
+);
+
+create table empleado(
+id_empleado int not null auto_increment primary key,
+nombre varchar (30),
+apellido varchar (25),
+correo varchar (45),
+telefono varchar (20),
+direccion varchar (35),
+fecha_nac date,
+sexo  varchar (20),
+fecha_contracto date,
+id_imagen int
+);
+
+create table factura(
+id_factura int not null auto_increment primary key,
+fecha date,
+id_usuario int,
+id_detalle int
+);
+
+create table detalle (
+num_detalle int not null auto_increment primary key,
+precio double (8,4),
+cantidad int ,
+descuento double (8,4),
+subtotal double (8,4),
+id_producto int
+);
+
+create table producto (
+id_producto int not null auto_increment primary key,
+producto varchar (45),
+fecha_entrada date,
+descripcion varchar (45),
+stock int,
+precio double (8, 4),
+id_categoria int,
+id_imagen int
+);
+
+create table categoria(
+id_categoria int not null auto_increment primary key,
+categoria varchar (40)
+);
+
+create table desvoluciones (
+id_desvolucion int not null auto_increment primary key,
+motivo text,
+fecha date,
+cantidad_d int,
+id_factura int
+);
+
+create table imagen(
+id_imagen int not null auto_increment primary key,
+ruta text
+);
+
+-- Esta linea de codigo en adelante representa la creacion de los trigger para las diferentes base de datos
+
+-- estos trigger es para la tabla cliente
+delimiter $$
+
+drop trigger if exists ingresa_e$$
+create trigger ingresa_e before insert 
+on empleado
+
+	for each row
+		begin
+			if (select max(id_imagen) from imagen ) is null then
+				set new.id_imagen = 1;
+            
+            else
+				set new.id_imagen = (select max(id_imagen) from imagen) + 1; 
+        end;
+        
+delimiter ;
+
+-- Estos trigger son para la tabla factura
+
+
+-- Estos trigger son lpara la tabla producto
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS ingresa_id$$
+CREATE TRIGGER ingresa_id  BEFORE 
+INSERT ON alumno
+
+FOR EACH ROW
+BEGIN
+	if (select max(id_materia)from materia) is null then
+		SET NEW.id_materia = 1;
+	else
+    
+	  SET NEW.id_materia = (select max(id_materia)from materia) +1;
+	END IF;
+    
+    if (select max(id_cuatrimestre) from cuatrimestre) is null then
+		set new.id_cuatrimestre = 1;
+	else 
+		set new.id_cuatrimestre = (select max(id_cuatrimestre) from cuatrimestre) +1;
+	end if;
+    
+    if (select max(id_maestro) from maestro) is null then 
+		set new.id_maestro = 1;
+	else 
+		set new.id_maestro = (select max(id_maestro) from maestro)+1;
+	end if;
+  END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+drop trigger if exists inserta_id$$ 
+create trigger inserta_id before insert
+on materia
+ 
+for each row
+begin
+	if (select max(id_alumno) from alumno) is null then
+		set new.id_alumno = 1;
+	else
+		set new.id_alumno = (select max(id_alumno) from alumno)+1;
+	end if;
+    
+end$$
+
+delimiter ;
+
+-- Esta linea de codigo representa todas las insercciones de datos en la base de datos dbflores
+
+insert into empleado (nombre, apellido, correo, telefono, direccion, fecha_nac, sexo, fecha_contracto, id_imagen) values ('juan', 'perez',  'juanperez@gmail.com', '83984934', 'los alcarrizos barrio 24 de abril', '17/01/98', 'masculino', '11/02/14', 001);
+insert into imagen (ruta) values ('fjdskalfjljdslkfjalskdfjlfjoirjewoifjkfsdji');
+
+
+-- Esta linea de codigo representa toda las 
+
+update empleado set fecha_nac = '11/02/14';
+select * from imagen;
