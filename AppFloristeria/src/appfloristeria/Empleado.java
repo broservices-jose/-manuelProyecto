@@ -19,6 +19,8 @@ import Controles.Imagen;
 import static Controles.Imagen.ingresar;
 import Controles.empleado;
 import static Controles.empleado.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.nio.file.CopyOption;
@@ -266,6 +268,7 @@ public class Empleado extends javax.swing.JFrame{
         cbsexo.addItem("Masculino");
         cbsexo.addItem("Femenino");
         jsp.setViewportView(jt);
+        llegar();
     }
     // ===========================================================================
     // Esta linea de codigo en adelante representa el metodo consultar el cual nos
@@ -372,6 +375,58 @@ public class Empleado extends javax.swing.JFrame{
         }
 
     }
+    
+    // =========================================================================================================
+    // Esta linea de codigo representa el metodo action Listener el cual nos va a permitir abri el formulario
+    // principal al cerrar este formulario
+    // =========================================================================================================
+    
+    private void llegar(){
+        this.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e){
+            try {
+                Principal frm = new Principal();
+                frm.setVisible(true);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        public void windowClose(WindowEvent e) throws ClassNotFoundException, SQLException{
+            Principal frm = new Principal();
+            frm.setVisible(true);
+        }
+        });
+    }
+    
+    /*  this.addWindowListener(new WindowAdapter() 
+        {
+            public void windowClosing(WindowEvent e)
+            {
+            JfrPrincipal ejemplo = new JfrPrincipal("Visor de Imagenes de productos",400,400);
+            ejemplo.mostrar();
+ 
+                setVisible(false);
+            }
+ 
+            public void windowClosed(WindowEvent e)
+            {
+            JfrPrincipal ejemplo = new JfrPrincipal("Visor de Imagenes de productos",400,400);
+            ejemplo.mostrar();
+                setVisible(false);
+            }
+        });
+ 
+        // ########### ESCUCHADOR BOTON CANCELAR   ##########
+        ActionListener escuchadorCancelar = new ActionListener()
+        {
+            public void actionPerformed(ActionEvent evt)
+            {
+            JfrPrincipal ejemplo = new JfrPrincipal("Visor de Imagenes de productos",400,400);
+            ejemplo.mostrar();
+            setVisible(false);
+            }
+    };*/
 
     /**
      * This method is called from within the constructor to initialize the form.

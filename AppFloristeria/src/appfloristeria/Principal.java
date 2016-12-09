@@ -18,6 +18,8 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     
 
@@ -37,7 +39,6 @@ public class Principal extends javax.swing.JFrame {
     
     Empleado em;
     Usuario u;
-    Facturacion f = new Facturacion();
     Producto p;
     
     /**
@@ -133,7 +134,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
-        f.setVisible(true);
+        Facturacion f;
+        try {
+            f = new Facturacion();
+            f.setVisible(true);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
@@ -174,15 +182,11 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Principal().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new Principal().setVisible(true);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

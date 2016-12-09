@@ -348,32 +348,32 @@ public class Facturacion extends javax.swing.JFrame {
     // =============================================================================================
     private void primero(){
         try{
-            String query = "select max(id_factura) from factura";
+            String query = "select max(id_factura) as codigo from factura";
             cn = Conexion.conectar();
             estado = cn.createStatement();
             cmd = estado.executeQuery(query);
         
             while(cmd.next()){
-                compa = cmd.getInt("id_factura");
+                compa = cmd.getInt("codigo");
             }
         }catch(ClassNotFoundException | SQLException ex){
             ex.printStackTrace();
         }
     }
     
-    // ==============================================================================================
+    // =============================================================================================
     // Esta linea de codigo repu comprueba si se termino de registrar una fictura 
     // =============================================================================================
 
     private void otro(){
         try{
-            String query = "select max(id_factura) from detalle";
+            String query = "select max(id_factura) as numero from detalle";
             cn = Conexion.conectar();
             estado = cn.createStatement();
             cmd = estado.executeQuery(query);
         
             while(cmd.next()){
-                otro = cmd.getInt("id_factura");
+                otro = cmd.getInt("numero");
             }
         }catch(ClassNotFoundException | SQLException ex){
             ex.printStackTrace();
@@ -384,17 +384,20 @@ public class Facturacion extends javax.swing.JFrame {
     // Esta linea de codigo repu comprueba si se termino de registrar una fictura 
     // =============================================================================================
     
-    private void comparar(){
+    private void comparar() throws ClassNotFoundException, SQLException{
         primero();
         otro();
-        if (compa == otro){
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Todavia no se a terminado de registrar las ventas realizada \n para terminar de "
-                                            + "registrar las ventas dar un clic en el boton registrar factura");
-            obtenerfac();
-        }
+            if (compa == otro){
+            JOptionPane.showMessageDialog(null, "no se");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Todavia no se a terminado de registrar las ventas realizada para \n terminar de "
+                                                +   "registrar las ventas dar un clic en el boton registrar factura");
+                obtenerfac();
+            }
+        
+        
+        
     }
     
     /**
@@ -847,7 +850,9 @@ public class Facturacion extends javax.swing.JFrame {
         // diferentes controles osea cuadro de texto cuando se seleccione uno de los items del combobox (cbpro)
         // ===============================================================================================
         try{
-            String sql = "select p.id_producto, p.producto, c.categoria, p.fecha_entrada, p.descripcion, p.stock, p.precio from producto as p inner join categoria as c on p.id_categoria = c.id_categoria where p.estado = 'habilitado' and p.id_producto ="+valor;
+            String sql = "select p.id_producto, p.producto, c.categoria, p.fecha_entrada, p.descripcion, p.stock, "
+                    + "p.precio from producto as p inner join categoria as c on p.id_categoria = c.id_categoria where "
+                    + "p.estado = 'habilitado' and p.id_producto ="+valor;
             cn = Conexion.conectar();
             estado = cn.createStatement();
             cmd = estado.executeQuery(sql);
